@@ -78,7 +78,7 @@ int statusLED = 0; //LED status: 0 = off, 1=on, 2=10%
 bool statusVoltage = 1;
 
 //fairy lights
-bool statusFairy = 0; // 0 = off, 1 = on
+int statusFairy = 0; // 0 = off, 1 = on , 2=fader
 int valueFairy;
 long timeFairy=0;
 
@@ -173,7 +173,7 @@ void loop()
 	}
 	
 	// fairy cycle usage
-	if (statusFairy)
+	if (statusFairy == 2)
 	{
 		timeFairy = millis();
 		valueFairy = 128+127*cos(2*PI/periodeFairy*timeFairy);
@@ -301,12 +301,21 @@ int checkCommand()
 		arrCommand[1] = 0;
 		return 1;
 	}
-	if (reedCommands[5][0] == arrCommand[0] && reedCommands[5][1] == arrCommand[1]) // toggle fairy on of 3-1
+	if (reedCommands[5][0] == arrCommand[0] && reedCommands[5][1] == arrCommand[1]) // toggle fairy on of 3-2
 	{
-		periodeFairy = random(250,750);
-		displaceFairy = random(2000,5000);
+		periodeFairy = random(3500,7000);
+		displaceFairy = random(250,750);
 		// toggle status of fairy lights
-		statusVoltage=!statusFairy;
+		statusFairy=statusFairy+1;
+		//cycle through the states
+		if (statusFairy > 2)
+			statusFairy = 0;
+		// if off kill the lights
+		if (statusFairy == 0)
+			analogWrite(pinOutFairy,0);
+		else if (statusFairy == 1)
+			analogWrite(pinOutFairy,255);
+		Serial.println("Fairy gtl");
 		// do voltage check
 		statusVoltage = 1;
 		//zeros the array
