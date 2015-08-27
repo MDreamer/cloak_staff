@@ -173,7 +173,7 @@ void loop()
 	}
 	
 	// fairy cycle usage
-	if (statusFairy == 2)
+	if (statusFairy == 3)
 	{
 		timeFairy = millis();
 		valueFairy = 128+127*cos(2*PI/periodeFairy*timeFairy);
@@ -308,14 +308,16 @@ int checkCommand()
 		// toggle status of fairy lights
 		statusFairy=statusFairy+1;
 		//cycle through the states
-		if (statusFairy > 2)
+		if (statusFairy > 3)
 			statusFairy = 0;
 		// if off kill the lights
 		if (statusFairy == 0)
 			analogWrite(pinOutFairy,0);
 		else if (statusFairy == 1)
+			analogWrite(pinOutFairy,127);
+		else if (statusFairy == 2)
 			analogWrite(pinOutFairy,255);
-		Serial.println("Fairy gtl");
+		//Serial.println("Fairy gtl");
 		// do voltage check
 		statusVoltage = 1;
 		//zeros the array
