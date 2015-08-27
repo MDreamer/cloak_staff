@@ -3,7 +3,7 @@
 #include "aux_func.c"
 
 #define myNodeID 10          //node ID of tx (range 0-30)
-#define network     210      //network group (can be in the range 1-250).
+#define network     42      //network group (can be in the range 1-250).
 #define RF_freq RF12_433MHZ     //Freq of RF12B can be RF12_433MHZ, RF12_868MHZ or RF12_915MHZ. Match freq to module
 
 #define com_types 6 // define the amount of commands that are use (light LED, change colors, patterns... etc)
