@@ -45,8 +45,8 @@ long VoltageOnTime = 150; //the time in ms in which the RCG LED it going to blin
 long VoltageOffTime = 4850; //the time in ms in which the RCG LED it going to blink
 
 // voltage reference for main power supply after voltage divider - LiPo 3S - 12.6v-9.6V -> 5v-0v
-const int vHigh = 520; // = 10.8v
-const int vMedium = 461; // = 9.6v
+const int vHigh = 820; // = 10.8v
+const int vMedium = 610; // = 9.6v
 
 //reed sensor debouncing setup handling 
 int stateMag1;             // the current reading from the input pin
@@ -314,7 +314,7 @@ int checkCommand()
 		if (statusFairy == 0)
 			analogWrite(pinOutFairy,0);
 		else if (statusFairy == 1)
-			analogWrite(pinOutFairy,127);
+			analogWrite(pinOutFairy,80);
 		else if (statusFairy == 2)
 			analogWrite(pinOutFairy,255);
 		//Serial.println("Fairy gtl");
